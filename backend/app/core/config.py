@@ -20,14 +20,15 @@ class Settings(BaseSettings):
     debug: bool = False
 
     # Database settings
-    mongo_db_user: str
-    mongo_db_password: SecretStr
-    mongo_db_host: str
-    mongo_db_name: str
+    mongo_user: str
+    mongo_password: SecretStr
+    mongo_host: str
+    mongo_name: str
+    mongo_min_pool_size: int
 
     @property
     def mongo_db_uri(self) -> str:
-        return f"mongodb+srv://{self.mongo_db_user}:{self.mongo_db_password.get_secret_value()}@{self.mongo_db_host}/?appName={self.mongo_db_name}"
+        return f"mongodb+srv://{self.mongo_user}:{self.mongo_password.get_secret_value()}@{self.mongo_host}/?appName={self.mongo_name}"
 
     # Load settings from .env
     model_config = SettingsConfigDict(env_file=_ENV_PATH)
