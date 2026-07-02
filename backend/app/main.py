@@ -20,6 +20,7 @@ app = FastAPI(
     redoc_url=get_settings().app_redoc_url,
 )
 
+# TODO: Define a list of origins
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
