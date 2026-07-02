@@ -6,6 +6,7 @@ _ENV_PATH = Path(__file__).resolve().parent.parent.parent / ".env"
 
 
 class Settings(BaseSettings):
+
     # App details
     app_name: str = "PunchedN"
     app_description: str = (
@@ -24,7 +25,7 @@ class Settings(BaseSettings):
     mongo_db_app_name: str
 
     @property
-    def mongo_db_url(self) -> str:
+    def mongo_db_uri(self) -> str:
         return f"mongodb+srv://{self.mongo_db_user}:{self.mongo_db_password.get_secret_value()}@{self.mongo_db_host}/?appName={self.mongo_db_app_name}"
 
     # Load settings from .env
