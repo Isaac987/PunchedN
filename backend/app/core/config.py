@@ -24,10 +24,12 @@ class Settings(BaseSettings):
     mongo_password: SecretStr
     mongo_host: str
     mongo_name: str
-    mongo_min_pool_size: int
+    mongo_min_pool_size: int = 10
+    mongo_max_pool_size: int = 100
+    mongo_ping_attempts: int = 5
 
     @property
-    def mongo_db_uri(self) -> str:
+    def mongo_uri(self) -> str:
         return f"mongodb+srv://{self.mongo_user}:{self.mongo_password.get_secret_value()}@{self.mongo_host}/?appName={self.mongo_name}"
 
     # Load settings from .env
